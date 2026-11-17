@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+
+<html dir="ltr" lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
+<title>The Last Arrest · Flujo de trabajo GTA con IA</title>
+<meta content="Cómo hice The Last Arrest, una película de despedida de GTA hecha con IA donde la policía por fin atrapa a Michael, Franklin y Trevor, de principio a fin en Kolbo. Todos los prompts, listos para copiar." name="description"/>
+<meta content="The Last Arrest · Flujo de trabajo GTA con IA" property="og:title"/>
+<meta content="Cómo hice The Last Arrest, una película de despedida de GTA hecha con IA donde la policía por fin atrapa a Michael, Franklin y Trevor, de principio a fin en Kolbo. Todos los prompts, listos para copiar." property="og:description"/>
+<meta content="../media/poster_arrest.jpg" property="og:image"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800;900&amp;family=JetBrains+Mono:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<style>
+:root{
+  color-scheme:dark;
+  --bg:#0c0d10; --bg2:#101114; --surface:#141619; --surface2:#1b1d21; --surface3:#24272c;
+  --ink:#f5f5f5; --ink2:#d3d6da; --muted:#b7bbc0; --line:#26282c; --line2:#3b3d40; --paper:#f2eee6; --on-paper:#111418;
+  --v1:#7a16e0; --v2:#a16cff; --cy:#2bd7d6; --amber:#F5C20C; --red:#B81418;
+  --grad:linear-gradient(97deg,#7a16e0,#008786);
+  --grad-text:linear-gradient(97deg,#a16cff,#2bd7d6);
+  --r:16px; --r-lg:24px;
+  --gut:max(18px,env(safe-area-inset-left,0px)); --gutr:max(18px,env(safe-area-inset-right,0px));
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Rubik,"Segoe UI",Arial,sans-serif;font-size:18px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:clip}
+img,video{max-width:100%;display:block}
+a{color:inherit}
+::selection{background:rgba(161,108,255,.45)}
+.atmo{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.atmo::before{content:"";position:absolute;width:90vmax;height:90vmax;top:-45vmax;right:-30vmax;background:radial-gradient(closest-side,rgba(122,22,224,.22),transparent 70%)}
+.atmo::after{content:"";position:absolute;width:70vmax;height:70vmax;bottom:-40vmax;left:-25vmax;background:radial-gradient(closest-side,rgba(0,135,134,.16),transparent 70%)}
+.wrap{max-width:1180px;margin-inline:auto;padding-left:var(--gut);padding-right:var(--gutr)}
+.narrow{max-width:820px}
+.grad-text{background:var(--grad-text);-webkit-background-clip:text;background-clip:text;color:transparent}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.eyebrow::before{content:"";width:26px;height:2px;background:var(--grad)}
+
+/* bar */
+.bar{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 82%,transparent);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:62px}
+.me{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:700;font-size:15px}
+.me img{width:36px;height:36px;border-radius:50%;box-shadow:0 0 0 2px var(--v2)}
+.me small{display:block;font-weight:500;color:var(--muted);font-size:12px;line-height:1.2}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 26px;border-radius:999px;font:700 17px/1 Rubik,sans-serif;text-decoration:none;border:0;cursor:pointer;transition:transform .15s,box-shadow .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn:focus-visible,.copy:focus-visible,.code:focus-visible{outline:3px solid var(--cy);outline-offset:3px}
+.btn-primary{background:var(--paper);color:var(--on-paper);box-shadow:0 14px 40px -12px rgba(242,238,230,.35)}
+.btn-grad{background:var(--grad);color:#fff;box-shadow:0 0 0 1px rgba(161,108,255,.35),0 18px 50px -12px rgba(122,22,224,.6)}
+.btn-ghost{background:transparent;color:var(--ink);box-shadow:0 0 0 1.5px var(--line2) inset}
+.bar .btn{min-height:42px;padding:0 18px;font-size:15px}
+
+/* hero */
+.hero{padding:clamp(34px,6vw,80px) 0 clamp(30px,5vw,60px)}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(28px,5vw,64px);align-items:center}
+h1{font-size:clamp(42px,7vw,86px);line-height:.95;font-weight:900;letter-spacing:-.03em;margin:18px 0 20px;text-wrap:balance}
+.lead{font-size:clamp(19px,2vw,22px);color:var(--ink2);max-width:40ch;margin:0 0 28px}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.phone{position:relative;justify-self:center;width:min(100%,340px);aspect-ratio:9/16;border-radius:34px;padding:10px;background:linear-gradient(160deg,#2a2c31,#0f1013);box-shadow:0 0 0 1px var(--line2),0 40px 90px -30px rgba(122,22,224,.55)}
+.phone video{width:100%;height:100%;object-fit:cover;border-radius:26px;background:#000}
+.phone .sound{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);min-height:40px;padding:0 16px;font-size:14px;background:rgba(12,13,16,.72);color:#fff;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.badge{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;background:var(--surface);box-shadow:0 0 0 1px var(--line2) inset;font-size:14px;color:var(--ink2);font-weight:500}
+.badge b{color:var(--ink)}
+
+/* sections */
+.sec{padding:clamp(56px,8vw,104px) 0 0}
+h2{font-size:clamp(32px,4.6vw,54px);line-height:1.02;font-weight:900;letter-spacing:-.025em;margin:14px 0 16px;text-wrap:balance}
+h3{font-size:clamp(22px,2.4vw,28px);line-height:1.15;font-weight:800;margin:0 0 10px}
+p{margin:0 0 16px}
+.muted{color:var(--muted)}
+.tldr{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:26px}
+.tldr div{padding:20px;border-radius:var(--r);background:var(--surface);box-shadow:0 0 0 1px var(--line) inset}
+.tldr b{display:block;font-size:30px;font-weight:900;line-height:1;margin-bottom:8px}
+.tldr span{color:var(--muted);font-size:15px;line-height:1.45;display:block}
+
+/* code strip (Kolbo offer) */
+.offer{margin-top:clamp(40px,6vw,64px);border-radius:var(--r-lg);padding:clamp(22px,3vw,34px);position:relative;overflow:hidden;
+  background:linear-gradient(120deg,rgba(122,22,224,.28),rgba(0,135,134,.2)),var(--surface);box-shadow:0 0 0 1px rgba(161,108,255,.35) inset}
+.offer .row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:18px}
+.offer h3{margin:0 0 4px}
+.codes{display:flex;flex-wrap:wrap;gap:10px}
+.code{display:inline-flex;align-items:center;justify-content:space-between;min-width:280px;gap:12px;text-align:left;min-height:52px;padding:0 8px 0 18px;border-radius:14px;border:0;cursor:pointer;background:var(--bg);color:var(--ink);box-shadow:0 0 0 1.5px var(--line2) inset;font:600 15px Rubik,sans-serif}
+.code b{font-family:"JetBrains Mono",monospace;font-size:17px;letter-spacing:.04em}
+.code i{font-style:normal;font-size:13px;color:var(--muted)}
+.code .pill{background:var(--paper);color:var(--on-paper);border-radius:10px;padding:8px 12px;font-size:13px;font-weight:700}
+.fine{font-size:14px;color:var(--muted);margin:14px 0 0}
+
+/* rules */
+.rules{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:26px}
+.rule{padding:24px;border-radius:var(--r-lg);background:var(--surface);box-shadow:0 0 0 1px var(--line) inset;position:relative;overflow:hidden}
+.rule .n{font-size:64px;font-weight:900;line-height:.9;margin-bottom:12px}
+.rule p{color:var(--ink2);font-size:16px;margin:0}
+
+/* steps */
+.step{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(20px,4vw,48px);align-items:start;padding:clamp(34px,5vw,56px) 0;border-top:1px solid var(--line)}
+.step:first-of-type{border-top:0}
+.step .num{display:inline-grid;place-items:center;width:44px;height:44px;border-radius:14px;background:var(--grad);font-weight:900;font-size:19px;margin-bottom:14px}
+.tool{display:inline-flex;align-items:center;gap:8px;margin:0 0 14px;padding:6px 12px;border-radius:999px;font-size:13px;font-weight:700;letter-spacing:.04em;background:rgba(43,215,214,.1);color:var(--cy);box-shadow:0 0 0 1px rgba(43,215,214,.35) inset}
+.step ul{margin:0 0 16px;padding-left:20px;color:var(--ink2)}
+.step li{margin:0 0 6px}
+.shots{display:grid;gap:10px}
+.shots.c2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.shots.c3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.shots figure{margin:0}
+.shots img{width:100%;border-radius:14px;box-shadow:0 0 0 1px var(--line2)}
+.shots .tall img{aspect-ratio:9/16;object-fit:cover}
+.shots figcaption{font-size:14px;color:var(--muted);margin-top:6px;line-height:1.4}
+
+/* prompt */
+.prompt{position:relative;margin:14px 0 0;border-radius:var(--r);background:#08090b;box-shadow:0 0 0 1px var(--line2) inset;overflow:hidden}
+.prompt-h{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 10px 10px 16px;border-bottom:1px solid var(--line);background:var(--surface)}
+.prompt-h span{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.prompt pre{margin:0;padding:16px;max-height:300px;overflow:auto;white-space:pre-wrap;word-break:break-word;font:13.5px/1.6 "JetBrains Mono",monospace;color:#e6e7ea}
+.prompt.long pre{max-height:420px}
+.copy{min-height:40px;padding:0 16px;border-radius:999px;border:0;cursor:pointer;background:var(--paper);color:var(--on-paper);font:700 14px Rubik,sans-serif}
+.copy.done{background:var(--cy)}
+.note{margin-top:14px;padding:14px 16px;border-radius:14px;background:rgba(245,194,12,.08);box-shadow:0 0 0 1px rgba(245,194,12,.3) inset;font-size:15px;color:var(--ink2)}
+.note b{color:var(--amber)}
+
+/* mistakes */
+.miss{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:26px}
+.miss div{padding:22px;border-radius:var(--r-lg);background:var(--surface);box-shadow:0 0 0 1px var(--line) inset}
+.miss b{display:block;font-size:19px;margin-bottom:6px}
+.miss .x{color:#ff7a7a;font-weight:800}
+.miss .ok{color:var(--cy);font-weight:800}
+.miss p{margin:0 0 10px;font-size:16px;color:var(--ink2)}
+
+/* final */
+.final{margin:clamp(64px,9vw,120px) 0 0;padding:clamp(40px,6vw,72px) 0;background:radial-gradient(80% 90% at 50% 0%,rgba(122,22,224,.32),transparent 70%),var(--bg2);border-top:1px solid var(--line)}
+.final .wrap{text-align:center}
+.final h2{font-size:clamp(36px,5.4vw,66px)}
+.final .lead{margin-inline:auto;max-width:46ch}
+.final .codes{justify-content:center;margin:26px 0 8px}
+.steps3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;max-width:900px;margin:28px auto 0;text-align:left}
+.steps3 div{padding:18px;border-radius:var(--r);background:var(--surface);box-shadow:0 0 0 1px var(--line) inset;font-size:16px;color:var(--ink2)}
+.steps3 b{display:block;color:var(--ink);font-size:17px;margin-bottom:4px}
+footer{padding:34px 0 60px;color:var(--muted);font-size:14px}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;align-items:center}
+.toast{position:fixed;left:50%;bottom:max(24px,env(safe-area-inset-bottom,0px));transform:translateX(-50%) translateY(120px);background:var(--paper);color:var(--on-paper);padding:12px 20px;border-radius:999px;font-weight:700;font-size:15px;transition:transform .25s;z-index:80}
+.toast.on{transform:translateX(-50%) translateY(0)}
+
+@media (max-width:900px){
+  .hero .wrap{grid-template-columns:minmax(0,1fr)}
+  .phone{width:min(78vw,320px)}
+  .tldr{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .rules,.miss,.steps3{grid-template-columns:minmax(0,1fr)}
+  .step{grid-template-columns:minmax(0,1fr)}
+  .bar .hide-s{display:none}
+}
+@media (prefers-reduced-motion:reduce){.btn:hover{transform:none}}
+
+.shots.p34 img{aspect-ratio:3/4;object-fit:cover}
+</style>
+<style>
+.langbar{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;padding-top:14px;padding-bottom:4px;position:relative;z-index:5}
+.langbar a{font:700 13px Rubik,sans-serif;letter-spacing:.04em;padding:7px 13px;border-radius:999px;background:rgba(255,255,255,.07);color:var(--ink,#fff);text-decoration:none;box-shadow:0 0 0 1px rgba(255,255,255,.12) inset}
+.langbar a.on{background:var(--paper,#f4efe6);color:var(--on-paper,#111)}
+.langnote{margin:0 0 26px}
+</style></head>
+<body>
+<div class="atmo"></div>
+<header class="bar"><div class="wrap"><a class="me" href="https://www.instagram.com/leviorel/" rel="noopener" target="_blank"><img alt="Orel Levi" src="../media/avatar.jpg"/><span>Orel Levi<small>@leviorel · Creador de contenido con IA</small></span></a>
+<a class="btn btn-primary" href="https://app.kolbo.ai?via=orellevi" rel="noopener" target="_blank">Prueba Kolbo<span class="hide-s"> · 50% de descuento</span></a></div></header><div class="langbar wrap"><a class="" href="../" lang="en">EN</a><a class="" href="../pt/" lang="pt">PT</a><a class="on" href="../es/" lang="es">ES</a><a class="" href="../fr/" lang="fr">FR</a><a class="" href="../ru/" lang="ru">RU</a></div>
+<section class="hero"><div class="wrap">
+<div>
+<span class="eyebrow">Flujo de trabajo gratis · The Last Arrest</span>
+<h1>Haz tu propia<br/><span class="grad-text">despedida de GTA.</span></h1>
+<p class="lead">13 años de caos. La policía por fin atrapa a Michael, Franklin y Trevor, y en vez de esposas el jefe les entrega medallas de oro. Así exactamente lo hice: casting, hojas de personaje, el prompt completo y la pantalla final del propio juego. Todo en Kolbo, cada prompt listo para copiar.</p>
+<div class="cta-row"><a class="btn btn-grad" href="#steps">Muéstrame el proceso</a>
+<a class="btn btn-ghost" href="https://app.kolbo.ai?via=orellevi" rel="noopener" target="_blank">Abrir Kolbo</a></div>
+<div class="badges"><span class="badge"><b>30s</b> de película</span><span class="badge"><b>1</b> prompt</span><span class="badge"><b>10</b> planos, 0 cámaras</span><span class="badge">Hecho con <b>Kolbo AI</b></span></div>
+</div>
+<div class="phone"><video autoplay="" id="ep" loop="" muted="" playsinline="" poster="../media/poster_arrest.jpg" preload="metadata" src="../media/arrest.mp4"></video>
+<button class="btn sound" id="snd" type="button">Toca para activar el sonido</button></div>
+</div></section>
+<section class="sec"><div class="wrap">
+<span class="eyebrow">La versión corta</span>
+<h2>Actores reales, un solo lugar, <span class="grad-text">una sola toma de 30 segundos.</span></h2>
+<p class="lead" style="max-width:60ch">Toda la película es una sola generación de Seedance 2.5 con diez planos cortados por dentro. Lo que hace que funcione pasa antes: caras fijadas y un prompt escrito como habla un director.</p>
+<div class="tldr"><div><b>01</b><span>Convierte a los personajes en actores reales</span></div><div><b>02</b><span>Fija las caras con hojas de personaje</span></div><div><b>03</b><span>Un solo lugar vacío</span></div><div><b>04</b><span>Una toma, luego Full Quality y el final</span></div></div>
+<div class="offer">
+<div class="row">
+<div><h3>Todo esto corre en Kolbo.</h3><p class="muted" style="margin:0">GPT Image, Nano Banana Pro y Seedance 2.5 en un solo lugar, con Full Quality (calidad completa) para el 1080p final. Empieza con mi descuento:</p></div>
+<div class="codes"><button class="code" data-copytext="ORELLEVI50" type="button"><span><b>ORELLEVI50</b><br/><i>50% de descuento tu primer mes</i></span><span class="pill">Copiar</span></button>
+<button class="code" data-copytext="ORELLEVI30" type="button"><span><b>ORELLEVI30</b><br/><i>30% de descuento por 3 meses</i></span><span class="pill">Copiar</span></button></div>
+</div>
+<p class="fine">Los códigos funcionan en tu primera compra de un plan mensual. Regístrate con <a href="https://app.kolbo.ai?via=orellevi" rel="noopener" target="_blank">mi link</a>, acepta las cookies en el sitio de Kolbo y pon el código al pagar.</p>
+</div>
+</div></section>
+<section class="sec"><div class="wrap">
+<span class="eyebrow">Antes de empezar</span>
+<h2>Tres reglas que <span class="grad-text">lo hicieron funcionar.</span></h2>
+<div class="rules"><div class="rule"><div class="n grad-text">1</div><h3>El sentimiento son 13 años</h3><p>La gente no llora por un juego. Llora por quién era cuando empezó a jugar. Todas las películas de esta tendencia que pegaron hablan del paso del tiempo, sin un solo diálogo.</p></div><div class="rule"><div class="n grad-text">2</div><h3>Un giro en el final</h3><p>Todos hicieron la despedida. Aquí la policía por fin gana después de 13 años, y el remate es un abrazo y una medalla en vez de esposas. Una sorpresa clara, nada que explicar.</p></div><div class="rule"><div class="n grad-text">3</div><h3>Un lugar, una toma</h3><p>Escribe la escena segundo a segundo, con bloques fijos para el look, el elenco, el lugar y las reglas. Seedance la filma en una sola toma, así la calle y las caras nunca cambian entre cortes.</p></div></div>
+</div></section>
+<section class="sec" id="steps"><div class="wrap">
+<span class="eyebrow">Paso a paso</span>
+<h2>El proceso completo, <span class="grad-text">en Kolbo.</span></h2>
+<div class="note langnote"><b>💡</b> Los prompts se quedan en inglés: cópialos y pégalos tal cual, los modelos los entienden mejor así.</div><div class="step">
+<div>
+<span class="num">1</span><span class="tool">GPT IMAGE · EN KOLBO</span><h3>Convierte a los personajes en actores reales</h3>
+<p>Sube una captura de cada personaje del juego y pide una foto real del mismo hombre, como si hubieran elegido a un actor para la película. Describe la cara, el pelo y la ropa que quieres mantener, y dile que quite todo rastro del juego.</p><div class="prompt"><div class="prompt-h"><span>Personaje del juego → actor real</span><button class="copy" data-copy="p-cast" type="button">Copiar</button></div><pre id="p-cast">Image 1 shows Michael De Santa, the video game character from GTA V. Create a genuine photograph of him as a REAL living man, as if a real actor were cast for a live-action film, instantly recognisable as Michael: late 40s, short dark hair combed back with grey at the temples, heavy brow, tired knowing eyes, strong jaw, slight double chin. Wardrobe: unbuttoned navy suit jacket over an open-collared white dress shirt, no tie. Expression: a warm, fatherly half-smile. Remove every trace of the game model: no polygon planes, no painted texture, no plastic skin, no CGI. Real pores, real eyelids, real hairline, slight skin imperfections, subtle asymmetry, unretouched skin. Half-body portrait, 3:4, standing on a dry canyon road in the Los Angeles hills at golden-hour sunset, warm low backlight from the right, shot on ARRI Alexa, 50mm, f/2.8, Kodak Portra 400 look, natural colors, soft bokeh. Photoreal, no text, no logos.</pre></div><div class="note"><b>Tip:</b> que caigan bien. Mi primer Trevor parecía el villano de una película de terror. "Adorable, un poco loco, nunca amenazante" lo arregló.</div>
+</div>
+<div class="shots c2 p34"><figure><img alt="Michael en el juego" loading="lazy" src="../media/game_michael.jpg"/><figcaption>En el juego</figcaption></figure><figure><img alt="Michael como hombre real" loading="lazy" src="../media/real_michael.jpg"/><figcaption>Como actor real</figcaption></figure><figure><img alt="Trevor en el juego" loading="lazy" src="../media/game_trevor.jpg"/><figcaption>En el juego</figcaption></figure><figure><img alt="Trevor como hombre real" loading="lazy" src="../media/real_trevor.jpg"/><figcaption>Como actor real</figcaption></figure></div>
+</div>
+<div class="step">
+<div>
+<span class="num">2</span><span class="tool">GPT IMAGE · EN KOLBO</span><h3>Fija cada cara con una hoja de personaje</h3>
+<p>Usa la foto que elegiste como referencia y pide una hoja de la misma persona desde varios ángulos. Esta hoja es lo que lee el modelo de video, y es lo que mantiene la misma cara en cada plano.</p><div class="prompt"><div class="prompt-h"><span>Prompt de hoja de personaje</span><button class="copy" data-copy="p-sheet" type="button">Copiar</button></div><pre id="p-sheet">Character reference sheet of the SAME real person shown in the reference image(s): keep the face, age, hair, skin and wardrobe strictly identical. Plain light grey studio background, even soft light, photographic, real person not a 3D render. Top row: 4 full-body views (front, three-quarter left, side profile, back). Bottom row: 4 head-and-shoulders views (front, three-quarter left, profile, three-quarter right) with a neutral expression. Real skin texture, pores, subtle asymmetry. No text, no labels, no numbers, no logos. Keep his warm, lovable look, not menacing. Wardrobe: off-white V-neck t-shirt with light road dust, worn blue jeans, brown work boots; the small dotted CUT HERE tattoo on the neck.</pre></div><p style="margin-top:16px">Haz lo mismo con cualquier personaje nuevo de tu historia. Aquí es el jefe de policía que entrega las medallas.</p>
+</div>
+<div class="shots"><figure><img alt="Hoja de personaje de Trevor" loading="lazy" src="../media/sheet_trevor.jpg"/></figure><figure><img alt="Hoja de personaje del jefe de policía" loading="lazy" src="../media/sheet_chief.jpg"/><figcaption>La misma persona en cada panel. De eso se trata.</figcaption></figure></div>
+</div>
+<div class="step">
+<div>
+<span class="num">3</span><span class="tool">GPT IMAGE · EN KOLBO</span><h3>Un solo lugar vacío</h3>
+<p>Una imagen del lugar sin nadie: el bulevar de noche, las patrullas en círculo, la luz del helicóptero. Es todo lo que necesitas como referencia. Los policías, los ciudadanos, los uniformes y las medallas son palabras en el prompt, no más imágenes.</p><div class="prompt"><div class="prompt-h"><span>Prompt del lugar</span><button class="copy" data-copy="p-loc" type="button">Copiar</button></div><pre id="p-loc">Empty location photograph, no people. A wide six-lane city boulevard at night in downtown Los Angeles, palm trees, closed shops and a gas station on the side, more than twenty black-and-white police cruisers parked at angles across the road forming a wide ring around an empty patch of asphalt in the center, all light bars flashing red and blue, doors open, a helicopter above casting a white spotlight cone onto the empty center. Night in a big Los Angeles-style city, wet asphalt reflecting red and blue police lights, sodium street lamps, light haze. Low wide angle from the road surface, 24mm. Look: a frame from a big-budget Hollywood crime feature, shot on ARRI Alexa 65, fine 35mm film grain, natural colors, real textures, no retouching. No logos, no watermark.</pre></div>
+</div>
+<div class="shots"><figure><img alt="Bulevar vacío de noche con patrullas de policía" loading="lazy" src="../media/loc_street.jpg"/><figcaption>El lugar, vacío</figcaption></figure></div>
+</div>
+<div class="step">
+<div>
+<span class="num">4</span><span class="tool">SEEDANCE 2.5 · EN KOLBO</span><h3>Filma toda la película en una sola toma</h3>
+<p>Una toma de Seedance 2.5, 30 segundos, 9:16, con las hojas y el lugar como referencias. El prompt está escrito como habla un director:</p><ul><li><b>Primero el gancho:</b> puntos láser rojos en la cara de Trevor en el primer segundo.</li><li><b>Segundo a segundo:</b> cada plano lleva su tamaño, ángulo, movimiento de cámara y una sola acción simple.</li><li><b>Un arco emocional</b> del miedo a la sorpresa y a un abrazo grupal, así las caras nunca se reinician entre cortes.</li></ul><div class="prompt long"><div class="prompt-h"><span>The Last Arrest · el prompt real (9:16, 30s)</span><button class="copy" data-copy="p-scene" type="button">Copiar</button></div><pre id="p-scene">Three famous criminals kneel on a wet city boulevard at night, surrounded by the police, and instead of handcuffs the police chief gives them gold medals. Ultra-realistic live-action short film, a big-budget Hollywood crime film that turns into a warm comedy, 30 seconds, vertical 9:16, ten shots cut together inside one generation, shot on ARRI Alexa Mini with spherical primes, Cinestill 800T night colour, fine film grain. Use @Image1 as Michael, @Image2 as Franklin, @Image3 as Trevor and @Image4 as the police chief: each sheet is an identity reference only, never render a sheet, a grey studio background or more than one copy of anyone. @Image1 Michael: late 40s, short dark hair combed back with grey at the temples, heavy brow, tired knowing eyes; navy suit jacket open over a white open-collared shirt, dark trousers. @Image2 Franklin: about 25, slim, very short black hair, short neat beard; dark blue short-sleeve button shirt over a white long-sleeve tee, thin gold chain, dark jeans, white sneakers. @Image3 Trevor: about 45, balding with thin messy dark hair on the sides, weathered sunburnt skin, warm wild eyes, the small dotted CUT HERE tattoo around his neck; dirty off-white V-neck t-shirt, worn blue jeans, brown work boots; lovable, a little crazy, never menacing. @Image4 the chief: about 62, broad, short grey hair, thick grey moustache, deep forehead lines; dark navy formal chief uniform, four small silver stars on each collar, white shirt, black tie. Preserve each man's exact face, hair and clothes in every shot; do not transfer any trait of these four onto officers or extras. Use @Image5 as the environment: the same six-lane downtown boulevard, palm trees, the skyline ahead, a gas station on the right, more than twenty black-and-white police cruisers parked at angles in a wide ring, doors open, light bars flashing; the camera stays on this boulevard and invents no other street. The officers are about thirty men and women of mixed ages in dark navy long-sleeve uniforms, silver badges, black duty belts, a few in dark tactical vests, plain patches with no readable text. FIXED GEOGRAPHY: the three men kneel side by side on the wet asphalt in the empty centre of the ring, facing the skyline, Michael on the left, Trevor in the middle, Franklin on the right; the officers stand behind the open cruiser doors about fifteen metres away; the chief's cruiser is parked directly in front of the three men; a police helicopter hovers high above. LIGHTING: hard white helicopter spotlight from directly above as the key, pulsing red and blue light-bar strobes as the fill from all around, warm amber sodium street lamps as the rim from behind; the wet asphalt mirrors every colour. Palette: wet black, navy, police red, cobalt blue, sodium amber, the gold of the medals. CAMERA POSITIONS, reused: CAM A wide from behind the officers at the cruiser doors, shoulder height, 35mm, the three men small in the centre; CAM B low at ground level just behind the three men, looking toward the chief's cruiser, 35mm; CAM C front medium of the three men, chest up, 50mm; CAM D 85mm telephoto close-up on one face or on hands. Motion is subtle and real time: no slow motion, nobody runs, the camera only pushes in slowly or holds. Nobody speaks.
+
+[0:00-0:02] SHOT 1, CAM D, extreme close-up on @Image3 Trevor's face, locked-off. Rain drips down his sunburnt forehead, his hands are clasped on top of his head, he squints into the blinding white spotlight from above. Five red laser dots crawl across his cheek and his neck tattoo; red and blue strobes wash over his skin. His eyes dart to the side once, then hold: caught.
+[0:02-0:05] SHOT 2, CAM A, slow push-in. CUT. STATE CARRIED OVER: Trevor still kneels with hands on his head, laser dots on his chest. The wide reveal: @Image1 Michael, @Image3 Trevor and @Image2 Franklin kneel in the spotlight in the centre of the ring, dozens of officers crouch behind the open doors aiming pistols with red laser sights at them. It looks like the last scene of a crime film. Tense, total silence among the men.
+[0:05-0:08] SHOT 3, CAM B, low, locked-off. CUT. STATE CARRIED OVER: the three still kneel in the foreground, backs to camera, hands on heads. The door of the chief's cruiser opens; @Image4 the chief steps out onto the wet road and walks slowly toward them, face set like stone, his shoes splashing in the reflections.
+[0:08-0:11] SHOT 4, CAM C, locked-off. CUT. STATE CARRIED OVER: the three kneel, hands on heads, laser dots on their shirts. The chief stops in front of them and slides his right hand into his jacket pocket. @Image3 Trevor shuts his eyes and waits for the handcuffs; @Image1 Michael lowers his eyes, resigned; @Image2 Franklin glances sideways for a way out. Dread.
+[0:11-0:14] SHOT 5, CAM D on the chief's hand, slow tilt up to Trevor. CUT. Instead of handcuffs the chief pulls out a heavy gold medal with a star on a dark blue-and-red ribbon and lowers the ribbon over @Image3 Trevor's head; the medal settles on his dirty V-neck. Trevor opens his eyes and stares down at it, mouth slightly open, completely lost.
+[0:14-0:17] SHOT 6, CAM A, locked-off. CUT. STATE CARRIED OVER: Trevor wears the gold medal; the chief hangs the second and third medals around Michael's and Franklin's necks. The red laser dots vanish one by one; the officers lower their pistols, stand up behind the doors and start to applaud, smiling. @Image1 Michael and @Image2 Franklin turn and look at each other, still on their knees. Disbelief.
+[0:17-0:21] SHOT 7, CAM A, slow lateral track along the edge of the ring. CUT. STATE CARRIED OVER: all three wear gold medals, all officers applaud. From the sidewalk behind the cruisers ordinary people step into the light and join the applause: a young convenience-store clerk in a red work vest, a middle-aged taxi driver, a woman in office clothes holding up her car keys, two paramedics in dark blue uniforms with reflective stripes. Everyone claps and smiles warmly.
+[0:21-0:24] SHOT 8, CAM C, locked-off. CUT. STATE CARRIED OVER: medals on all three chests, applause all around. The three men slowly stand up from their knees. The chief stands straight and gives a formal salute. @Image3 Trevor, for the first time in his life, salutes back with total seriousness, chin up, chest out, the medal catching the spotlight. Pride.
+[0:24-0:28] SHOT 9, CAM C, gentle handheld. CUT. STATE CARRIED OVER: the three stand, medals on, crowd applauding. The chief shakes Trevor's hand once and turns to leave; Trevor pulls him back by the hand into a huge bear hug, chest to chest, the chief's moustache pressed against Trevor's shoulder, both faces clearly separate and visible. The chief is stunned, arms stuck at his sides. @Image1 Michael and @Image2 Franklin burst out laughing beside them; the officers behind them laugh and wipe their eyes.
+[0:28-0:30] SHOT 10, CAM A, locked-off. CUT. STATE CARRIED OVER: the hug in the centre of the ring, everyone around them clapping. The chief's stuck arms finally rise and he pats Trevor's back twice; the crowd cheers louder; then a hard cut to black.
+
+EMOTIONAL ARC: caught (0-2) → the tension of a real arrest (2-8) → dread (8-11) → shock (11-14) → disbelief (14-17) → warmth (17-21) → pride (21-24) → laughter that turns into tears (24-30). The expressions never jump backward and never reset between shots.
+STYLE AND REALISM: unretouched skin with visible pores and rain on it, no beauty filter, no video-game look, no CGI look, real wet night. The only text anywhere is POLICE on the cruiser doors. No subtitles, no captions, no text overlays, no logos.
+AUDIO: continuous night-city ambience: sirens that fade out after SHOT 3, the helicopter rotor, light rain, footsteps splashing, the clink of the medal, applause that grows from SHOT 6, laughter and a cheer at the end. No music, no speech.
+AVOID: jitter, temporal flicker, facial drift between shots, clothing change, extra fingers, merged faces or bodies in the hug, a character sheet or white background in any frame, chaotic composition.</pre></div>
+</div>
+<div class="shots c2 tall"><figure><img alt="La cara de Trevor con puntos láser rojos" loading="lazy" src="../media/a_0.6.jpg"/><figcaption>El gancho: puntos láser rojos</figcaption></figure><figure><img alt="El trío se arrodilla" loading="lazy" src="../media/a_9.jpg"/><figcaption>Atrapados, por fin</figcaption></figure><figure><img alt="Los ciudadanos aplauden" loading="lazy" src="../media/a_20.jpg"/><figcaption>Toda la ciudad aplaude</figcaption></figure><figure><img alt="Trevor abraza al jefe" loading="lazy" src="../media/a_27.jpg"/><figcaption>Trevor abraza al jefe</figcaption></figure></div>
+</div>
+<div class="step">
+<div>
+<span class="num">5</span><span class="tool">DRAFT → FULL QUALITY</span><h3>Primero el draft, luego Full Quality</h3>
+<p>Corre cada escena como draft (borrador) en 480p. Es rápido y barato, así puedes verla, arreglar el prompt y volver a correrla. Solo cuando la toma esté bien, mándala a <b>Full Quality</b> en Kolbo. Renderiza la misma toma otra vez en 1080p nativo.</p><div class="note"><b>Importante:</b> los drafts que piensas terminar en Full Quality tienen que hacerse solo con imágenes de referencia, sin video de referencia.</div>
+</div>
+<div class="shots c2 tall"><figure><img alt="El trío con medallas de oro" loading="lazy" src="../media/a_14.jpg"/><figcaption>Medallas en vez de esposas</figcaption></figure><figure><img alt="Plano general del arresto" loading="lazy" src="../media/a_4.jpg"/><figcaption>La misma toma en 1080p</figcaption></figure></div>
+</div>
+<div class="step">
+<div>
+<span class="num">6</span><span class="tool">CLAUDE · LA EDICIÓN</span><h3>Termínala en el idioma del propio juego</h3>
+<p>El último cuadro es lo que hace que la gente etiquete a sus amigos. Usé las pantallas reales de GTA V: cinco estrellas de búsqueda que parpadean y se apagan, y el "mission passed" amarillo con su lista. No las dibujes de memoria, cualquiera que haya jugado va a ver que está mal. Le pedí a Claude que las reconstruyera a partir de capturas reales del juego.</p><div class="prompt"><div class="prompt-h"><span>Prompt para Claude (adjunta 2-3 capturas reales)</span><button class="copy" data-copy="p-ui" type="button">Copiar</button></div><pre id="p-ui">I attached real screenshots of the GTA V "mission passed" screen. Rebuild it as a transparent PNG overlay for my video, exactly like the game: trace the yellow "mission passed" lettering from the screenshot (don't use a similar font), the same yellow and the same dark box under it with a title row, three rows with white checkboxes and a "Completion - Gold 100%" row with the gold dot. My texts: title "The Last Arrest", rows "13 Years of Chaos", "Never Busted", "Made the Police Cry". Then put it on the last frame of my video with a short fade-in, and keep it inside Instagram's safe zone: nothing in the top 250 px, the bottom 420 px or the right-side icons of a 1080x1920 frame.</pre></div><div class="note"><b>Música:</b> en Instagram elige "See You Again" de la biblioteca de música, desde la parte que le quede a tu final. Es la canción de toda esta tendencia.</div>
+</div>
+<div class="shots c2 tall"><figure><img alt="Pantalla de mission passed" loading="lazy" src="../media/a_31.5.jpg"/><figcaption>Mission passed, dentro de la zona segura de Instagram</figcaption></figure><figure><img alt="Estrellas de búsqueda arriba a la derecha" loading="lazy" src="../media/a_9.jpg"/><figcaption>Cinco estrellas de búsqueda, arriba a la derecha</figcaption></figure></div>
+</div>
+</div></section>
+<section class="sec"><div class="wrap">
+<span class="eyebrow">Aprende de mis tomas</span>
+<h2>Qué falló <span class="grad-text">y qué lo arregló.</span></h2>
+<div class="miss"><div><b>Una interfaz que nadie se creyó</b><p><span class="x">Falló:</span> un "mission passed" que dibujé de memoria. Los fans lo notaron en un segundo.</p><p><span class="ok">Arreglo:</span> reconstruido a partir de capturas reales del juego, con las letras calcadas y los colores reales.</p></div><div><b>Texto tapado por Instagram</b><p><span class="x">Falló:</span> las estrellas y la tarjeta final quedaron donde Instagram pone los likes y la descripción.</p><p><span class="ok">Arreglo:</span> todo dentro de la zona segura: nada en los 250 px de arriba, los 420 px de abajo ni en la columna de íconos de la derecha.</p></div><div><b>Una frase que nadie entendió</b><p><span class="x">Falló:</span> "See you in Vice City". La mitad del mundo no la entendió.</p><p><span class="ok">Arreglo:</span> "Goodbye GTA V · Hello GTA VI". Palabras simples que todos conocen.</p></div></div>
+</div></section>
+<section class="final" id="start"><div class="wrap">
+<span class="eyebrow">Te toca</span>
+<h2>Dales <span class="grad-text">tu final.</span></h2>
+<p class="lead">GTA VI sale el 19 de noviembre. Todas las herramientas de esta página están en Kolbo. Regístrate con mi link y aprovecha el descuento de tu primer mes.</p>
+<a class="btn btn-grad" href="https://app.kolbo.ai?via=orellevi" rel="noopener" target="_blank">Empieza en Kolbo</a>
+<div class="codes"><button class="code" data-copytext="ORELLEVI50" type="button"><span><b>ORELLEVI50</b><br/><i>50% de descuento tu primer mes</i></span><span class="pill">Copiar</span></button>
+<button class="code" data-copytext="ORELLEVI30" type="button"><span><b>ORELLEVI30</b><br/><i>30% de descuento por 3 meses</i></span><span class="pill">Copiar</span></button></div>
+<div class="steps3">
+<div><b>1. Regístrate</b>Con <a href="https://app.kolbo.ai?via=orellevi" rel="noopener" target="_blank">mi link</a> y acepta las cookies en el sitio.</div>
+<div><b>2. Elige un plan mensual</b>Los códigos funcionan en tu primera compra.</div>
+<div><b>3. Pon el código</b>Al pagar. Después vuelve aquí y empieza por el paso 1.</div>
+</div>
+<p class="fine" style="margin-top:28px">¿Hiciste uno? Etiqueta a <b>@leviorel</b> y <b>@kolbo.ai</b>, quiero verlo.</p>
+</div></section>
+<footer><div class="wrap"><span>Orel Levi · <a href="https://www.instagram.com/leviorel/" rel="noopener" target="_blank">@leviorel</a></span><span>The Last Arrest · Hecho con Kolbo AI · Hecho por fans, sin afiliación con Rockstar Games</span></div></footer>
+<div class="toast" id="toast">Copiado</div>
+<script>
+const toast=document.getElementById('toast');let tt;
+function flash(msg){toast.textContent=msg;toast.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>toast.classList.remove('on'),1600)}
+async function copyText(t){try{await navigator.clipboard.writeText(t);return true}catch(e){const a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();let ok=false;try{ok=document.execCommand('copy')}catch(_){}a.remove();return ok}}
+document.querySelectorAll('.copy').forEach(b=>b.addEventListener('click',async()=>{const ok=await copyText(document.getElementById(b.dataset.copy).textContent);b.textContent=ok?'Copiado':'Selecciona y copia';b.classList.toggle('done',ok);flash(ok?'Prompt copiado':'Selecciona el texto para copiar');setTimeout(()=>{b.textContent='Copiar';b.classList.remove('done')},1800)}));
+document.querySelectorAll('[data-copytext]').forEach(b=>b.addEventListener('click',async()=>{const ok=await copyText(b.dataset.copytext);flash(ok?b.dataset.copytext+' copiado':'Código: '+b.dataset.copytext)}));
+const v=document.getElementById('ep'),s=document.getElementById('snd');
+s.addEventListener('click',()=>{v.muted=!v.muted;if(!v.muted){v.currentTime=0;v.play()}s.textContent=v.muted?'Toca para el sonido':'Sonido activado'});
+</script>
+</body>
+</html>

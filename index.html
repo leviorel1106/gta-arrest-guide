@@ -1,15 +1,16 @@
-<!doctype html>
-<html lang="en" dir="ltr">
+<!DOCTYPE html>
+
+<html dir="ltr" lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
 <title>The Last Arrest · GTA AI Workflow</title>
-<meta name="description" content="How I made The Last Arrest, an AI GTA farewell film where the police finally catch Michael, Franklin and Trevor, start to finish in Kolbo. Every prompt, ready to copy.">
-<meta property="og:title" content="The Last Arrest · GTA AI Workflow">
-<meta property="og:description" content="How I made The Last Arrest, an AI GTA farewell film where the police finally catch Michael, Franklin and Trevor, start to finish in Kolbo. Every prompt, ready to copy.">
-<meta property="og:image" content="media/poster_arrest.jpg">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<meta content="How I made The Last Arrest, an AI GTA farewell film where the police finally catch Michael, Franklin and Trevor, start to finish in Kolbo. Every prompt, ready to copy." name="description"/>
+<meta content="The Last Arrest · GTA AI Workflow" property="og:title"/>
+<meta content="How I made The Last Arrest, an AI GTA farewell film where the police finally catch Michael, Franklin and Trevor, start to finish in Kolbo. Every prompt, ready to copy." property="og:description"/>
+<meta content="media/poster_arrest.jpg" property="og:image"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800;900&amp;family=JetBrains+Mono:wght@400;600&amp;display=swap" rel="stylesheet"/>
 <style>
 :root{
   color-scheme:dark;
@@ -154,85 +155,83 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;
 
 .shots.p34 img{aspect-ratio:3/4;object-fit:cover}
 </style>
-</head>
+<style>
+.langbar{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;padding-top:14px;padding-bottom:4px;position:relative;z-index:5}
+.langbar a{font:700 13px Rubik,sans-serif;letter-spacing:.04em;padding:7px 13px;border-radius:999px;background:rgba(255,255,255,.07);color:var(--ink,#fff);text-decoration:none;box-shadow:0 0 0 1px rgba(255,255,255,.12) inset}
+.langbar a.on{background:var(--paper,#f4efe6);color:var(--on-paper,#111)}
+.langnote{margin:0 0 26px}
+</style></head>
 <body>
 <div class="atmo"></div>
-
 <header class="bar"><div class="wrap">
-  <a class="me" href="https://www.instagram.com/leviorel/" target="_blank" rel="noopener"><img src="media/avatar.jpg" alt="Orel Levi"><span>Orel Levi<small>@leviorel · AI Content Creator</small></span></a>
-  <a class="btn btn-primary" href="https://app.kolbo.ai?via=orellevi" target="_blank" rel="noopener">Try Kolbo<span class="hide-s">&nbsp;· 50% off</span></a>
-</div></header>
-
+<a class="me" href="https://www.instagram.com/leviorel/" rel="noopener" target="_blank"><img alt="Orel Levi" src="media/avatar.jpg"/><span>Orel Levi<small>@leviorel · AI Content Creator</small></span></a>
+<a class="btn btn-primary" href="https://app.kolbo.ai?via=orellevi" rel="noopener" target="_blank">Try Kolbo<span class="hide-s"> · 50% off</span></a>
+</div></header><div class="langbar wrap"><a class="on" href="./" lang="en">EN</a><a class="" href="pt/" lang="pt">PT</a><a class="" href="es/" lang="es">ES</a><a class="" href="fr/" lang="fr">FR</a><a class="" href="ru/" lang="ru">RU</a></div>
 <section class="hero"><div class="wrap">
-  <div>
-    <span class="eyebrow">Free workflow · The Last Arrest</span>
-    <h1>Make your own<br><span class="grad-text">GTA farewell.</span></h1>
-    <p class="lead">13 years of chaos. The police finally catch Michael, Franklin and Trevor, and instead of handcuffs the chief hands them gold medals. This is exactly how I made it: casting, character sheets, the full prompt and the game's own ending screen. All in Kolbo, every prompt ready to copy.</p>
-    <div class="cta-row">
-      <a class="btn btn-grad" href="#steps">Show me the workflow</a>
-      <a class="btn btn-ghost" href="https://app.kolbo.ai?via=orellevi" target="_blank" rel="noopener">Open Kolbo</a>
-    </div>
-    <div class="badges"><span class="badge"><b>30s</b> film</span><span class="badge"><b>1</b> prompt</span><span class="badge"><b>10</b> shots, 0 cameras</span><span class="badge">Made with <b>Kolbo AI</b></span></div>
-  </div>
-  <div class="phone">
-    <video id="ep" src="media/arrest.mp4" poster="media/poster_arrest.jpg" autoplay muted loop playsinline preload="metadata"></video>
-    <button class="btn sound" id="snd" type="button">Tap for sound</button>
-  </div>
+<div>
+<span class="eyebrow">Free workflow · The Last Arrest</span>
+<h1>Make your own<br/><span class="grad-text">GTA farewell.</span></h1>
+<p class="lead">13 years of chaos. The police finally catch Michael, Franklin and Trevor, and instead of handcuffs the chief hands them gold medals. This is exactly how I made it: casting, character sheets, the full prompt and the game's own ending screen. All in Kolbo, every prompt ready to copy.</p>
+<div class="cta-row">
+<a class="btn btn-grad" href="#steps">Show me the workflow</a>
+<a class="btn btn-ghost" href="https://app.kolbo.ai?via=orellevi" rel="noopener" target="_blank">Open Kolbo</a>
+</div>
+<div class="badges"><span class="badge"><b>30s</b> film</span><span class="badge"><b>1</b> prompt</span><span class="badge"><b>10</b> shots, 0 cameras</span><span class="badge">Made with <b>Kolbo AI</b></span></div>
+</div>
+<div class="phone">
+<video autoplay="" id="ep" loop="" muted="" playsinline="" poster="media/poster_arrest.jpg" preload="metadata" src="media/arrest.mp4"></video>
+<button class="btn sound" id="snd" type="button">Tap for sound</button>
+</div>
 </div></section>
-
 <section class="sec"><div class="wrap">
-  <span class="eyebrow">The short version</span>
-  <h2>Real actors, one place, <span class="grad-text">one 30-second run.</span></h2>
-  <p class="lead" style="max-width:60ch">The whole film is a single Seedance 2.5 generation with ten shots cut inside it. What makes it work happens before that: faces that are locked and a prompt written like a director talks.</p>
-  <div class="tldr"><div><b>01</b><span>Turn the characters into real actors</span></div><div><b>02</b><span>Lock the faces with sheets</span></div><div><b>03</b><span>One empty location</span></div><div><b>04</b><span>One run, then Full Quality and the ending</span></div></div>
-
-  <div class="offer">
-    <div class="row">
-      <div><h3>Everything here runs on Kolbo.</h3><p class="muted" style="margin:0">GPT Image, Nano Banana Pro and Seedance 2.5 in one place, with Full Quality for the final 1080p. Start with my discount:</p></div>
-      <div class="codes">
-        <button class="code" type="button" data-copytext="ORELLEVI50"><span><b>ORELLEVI50</b><br><i>50% off your first month</i></span><span class="pill">Copy</span></button>
-        <button class="code" type="button" data-copytext="ORELLEVI30"><span><b>ORELLEVI30</b><br><i>30% off for 3 months</i></span><span class="pill">Copy</span></button>
-      </div>
-    </div>
-    <p class="fine">Codes work on your first purchase of a monthly plan. Sign up through <a href="https://app.kolbo.ai?via=orellevi" target="_blank" rel="noopener">my link</a>, accept the cookies on Kolbo's site and enter the code at checkout.</p>
-  </div>
+<span class="eyebrow">The short version</span>
+<h2>Real actors, one place, <span class="grad-text">one 30-second run.</span></h2>
+<p class="lead" style="max-width:60ch">The whole film is a single Seedance 2.5 generation with ten shots cut inside it. What makes it work happens before that: faces that are locked and a prompt written like a director talks.</p>
+<div class="tldr"><div><b>01</b><span>Turn the characters into real actors</span></div><div><b>02</b><span>Lock the faces with sheets</span></div><div><b>03</b><span>One empty location</span></div><div><b>04</b><span>One run, then Full Quality and the ending</span></div></div>
+<div class="offer">
+<div class="row">
+<div><h3>Everything here runs on Kolbo.</h3><p class="muted" style="margin:0">GPT Image, Nano Banana Pro and Seedance 2.5 in one place, with Full Quality for the final 1080p. Start with my discount:</p></div>
+<div class="codes">
+<button class="code" data-copytext="ORELLEVI50" type="button"><span><b>ORELLEVI50</b><br/><i>50% off your first month</i></span><span class="pill">Copy</span></button>
+<button class="code" data-copytext="ORELLEVI30" type="button"><span><b>ORELLEVI30</b><br/><i>30% off for 3 months</i></span><span class="pill">Copy</span></button>
+</div>
+</div>
+<p class="fine">Codes work on your first purchase of a monthly plan. Sign up through <a href="https://app.kolbo.ai?via=orellevi" rel="noopener" target="_blank">my link</a>, accept the cookies on Kolbo's site and enter the code at checkout.</p>
+</div>
 </div></section>
-
 <section class="sec"><div class="wrap">
-  <span class="eyebrow">Before you start</span>
-  <h2>Three rules that <span class="grad-text">made it work.</span></h2>
-  <div class="rules"><div class="rule"><div class="n grad-text">1</div><h3>The feeling is 13 years</h3><p>People don't cry over a game. They cry over who they were when they started playing. Every film in this trend that took off is about time passing, told with zero dialogue.</p></div><div class="rule"><div class="n grad-text">2</div><h3>A twist on the ending</h3><p>Everyone did the goodbye. Here the cops finally win after 13 years, and the payoff is a hug and a medal instead of handcuffs. One clear surprise, nothing to explain.</p></div><div class="rule"><div class="n grad-text">3</div><h3>One place, one run</h3><p>Write the scene second by second, with fixed blocks for look, cast, location and rules. Seedance shoots it in one run, so the street and the faces never change between cuts.</p></div></div>
+<span class="eyebrow">Before you start</span>
+<h2>Three rules that <span class="grad-text">made it work.</span></h2>
+<div class="rules"><div class="rule"><div class="n grad-text">1</div><h3>The feeling is 13 years</h3><p>People don't cry over a game. They cry over who they were when they started playing. Every film in this trend that took off is about time passing, told with zero dialogue.</p></div><div class="rule"><div class="n grad-text">2</div><h3>A twist on the ending</h3><p>Everyone did the goodbye. Here the cops finally win after 13 years, and the payoff is a hug and a medal instead of handcuffs. One clear surprise, nothing to explain.</p></div><div class="rule"><div class="n grad-text">3</div><h3>One place, one run</h3><p>Write the scene second by second, with fixed blocks for look, cast, location and rules. Seedance shoots it in one run, so the street and the faces never change between cuts.</p></div></div>
 </div></section>
-
 <section class="sec" id="steps"><div class="wrap">
-  <span class="eyebrow">Step by step</span>
-  <h2>The full workflow, <span class="grad-text">in Kolbo.</span></h2>
-
-  <div class="step">
-    <div>
-      <span class="num">1</span><span class="tool">GPT IMAGE · IN KOLBO</span><h3>Turn the characters into real actors</h3>
-      <p>Upload a screenshot of each character from the game and ask for a real photograph of the same man, as if an actor were cast for the movie. Describe the face, hair and clothes you want to keep, and tell it to remove every trace of the game.</p><div class="prompt"><div class="prompt-h"><span>Game character → real actor</span><button class="copy" type="button" data-copy="p-cast">Copy</button></div><pre id="p-cast">Image 1 shows Michael De Santa, the video game character from GTA V. Create a genuine photograph of him as a REAL living man, as if a real actor were cast for a live-action film, instantly recognisable as Michael: late 40s, short dark hair combed back with grey at the temples, heavy brow, tired knowing eyes, strong jaw, slight double chin. Wardrobe: unbuttoned navy suit jacket over an open-collared white dress shirt, no tie. Expression: a warm, fatherly half-smile. Remove every trace of the game model: no polygon planes, no painted texture, no plastic skin, no CGI. Real pores, real eyelids, real hairline, slight skin imperfections, subtle asymmetry, unretouched skin. Half-body portrait, 3:4, standing on a dry canyon road in the Los Angeles hills at golden-hour sunset, warm low backlight from the right, shot on ARRI Alexa, 50mm, f/2.8, Kodak Portra 400 look, natural colors, soft bokeh. Photoreal, no text, no logos.</pre></div><div class="note"><b>Tip:</b> keep them likeable. My first Trevor looked like a horror film villain. "Lovable, a little crazy, never menacing" fixed it.</div>
-    </div>
-    <div class="shots c2 p34"><figure><img src="media/game_michael.jpg" alt="Michael in the game" loading="lazy"><figcaption>In the game</figcaption></figure><figure><img src="media/real_michael.jpg" alt="Michael as a real man" loading="lazy"><figcaption>As a real actor</figcaption></figure><figure><img src="media/game_trevor.jpg" alt="Trevor in the game" loading="lazy"><figcaption>In the game</figcaption></figure><figure><img src="media/real_trevor.jpg" alt="Trevor as a real man" loading="lazy"><figcaption>As a real actor</figcaption></figure></div>
-  </div>
-  <div class="step">
-    <div>
-      <span class="num">2</span><span class="tool">GPT IMAGE · IN KOLBO</span><h3>Lock every face with a character sheet</h3>
-      <p>Give the photo you chose as the reference and ask for a sheet of the same person from several angles. This sheet is what the video model reads, and it is what keeps the same face in every shot.</p><div class="prompt"><div class="prompt-h"><span>Character sheet prompt</span><button class="copy" type="button" data-copy="p-sheet">Copy</button></div><pre id="p-sheet">Character reference sheet of the SAME real person shown in the reference image(s): keep the face, age, hair, skin and wardrobe strictly identical. Plain light grey studio background, even soft light, photographic, real person not a 3D render. Top row: 4 full-body views (front, three-quarter left, side profile, back). Bottom row: 4 head-and-shoulders views (front, three-quarter left, profile, three-quarter right) with a neutral expression. Real skin texture, pores, subtle asymmetry. No text, no labels, no numbers, no logos. Keep his warm, lovable look, not menacing. Wardrobe: off-white V-neck t-shirt with light road dust, worn blue jeans, brown work boots; the small dotted CUT HERE tattoo on the neck.</pre></div><p style="margin-top:16px">Do the same for anyone new in your story. Here it's the police chief who hands out the medals.</p>
-    </div>
-    <div class="shots "><figure><img src="media/sheet_trevor.jpg" alt="Trevor character sheet" loading="lazy"></figure><figure><img src="media/sheet_chief.jpg" alt="Police chief character sheet" loading="lazy"><figcaption>Same person in every panel. That's the whole point.</figcaption></figure></div>
-  </div>
-  <div class="step">
-    <div>
-      <span class="num">3</span><span class="tool">GPT IMAGE · IN KOLBO</span><h3>One empty location</h3>
-      <p>One image of the place with nobody in it: the boulevard at night, the cruisers in a ring, the helicopter light. That's all the references you need. Cops, citizens, uniforms and the medals are words in the prompt, not more images.</p><div class="prompt"><div class="prompt-h"><span>Location prompt</span><button class="copy" type="button" data-copy="p-loc">Copy</button></div><pre id="p-loc">Empty location photograph, no people. A wide six-lane city boulevard at night in downtown Los Angeles, palm trees, closed shops and a gas station on the side, more than twenty black-and-white police cruisers parked at angles across the road forming a wide ring around an empty patch of asphalt in the center, all light bars flashing red and blue, doors open, a helicopter above casting a white spotlight cone onto the empty center. Night in a big Los Angeles-style city, wet asphalt reflecting red and blue police lights, sodium street lamps, light haze. Low wide angle from the road surface, 24mm. Look: a frame from a big-budget Hollywood crime feature, shot on ARRI Alexa 65, fine 35mm film grain, natural colors, real textures, no retouching. No logos, no watermark.</pre></div>
-    </div>
-    <div class="shots "><figure><img src="media/loc_street.jpg" alt="Empty city boulevard at night with police cruisers" loading="lazy"><figcaption>The location, empty</figcaption></figure></div>
-  </div>
-  <div class="step">
-    <div>
-      <span class="num">4</span><span class="tool">SEEDANCE 2.5 · IN KOLBO</span><h3>Shoot the whole film in one run</h3>
-      <p>One Seedance 2.5 run, 30 seconds, 9:16, with the sheets and the location as references. The prompt is written like a director talks:</p><ul><li><b>The hook first:</b> red laser dots on Trevor's face in the first second.</li><li><b>Second by second:</b> every shot gets its size, angle, camera move and one simple action.</li><li><b>An emotional arc</b> from fear to surprise to a group hug, so faces never reset between cuts.</li></ul><div class="prompt long"><div class="prompt-h"><span>The Last Arrest · the real prompt (9:16, 30s)</span><button class="copy" type="button" data-copy="p-scene">Copy</button></div><pre id="p-scene">Three famous criminals kneel on a wet city boulevard at night, surrounded by the police, and instead of handcuffs the police chief gives them gold medals. Ultra-realistic live-action short film, a big-budget Hollywood crime film that turns into a warm comedy, 30 seconds, vertical 9:16, ten shots cut together inside one generation, shot on ARRI Alexa Mini with spherical primes, Cinestill 800T night colour, fine film grain. Use @Image1 as Michael, @Image2 as Franklin, @Image3 as Trevor and @Image4 as the police chief: each sheet is an identity reference only, never render a sheet, a grey studio background or more than one copy of anyone. @Image1 Michael: late 40s, short dark hair combed back with grey at the temples, heavy brow, tired knowing eyes; navy suit jacket open over a white open-collared shirt, dark trousers. @Image2 Franklin: about 25, slim, very short black hair, short neat beard; dark blue short-sleeve button shirt over a white long-sleeve tee, thin gold chain, dark jeans, white sneakers. @Image3 Trevor: about 45, balding with thin messy dark hair on the sides, weathered sunburnt skin, warm wild eyes, the small dotted CUT HERE tattoo around his neck; dirty off-white V-neck t-shirt, worn blue jeans, brown work boots; lovable, a little crazy, never menacing. @Image4 the chief: about 62, broad, short grey hair, thick grey moustache, deep forehead lines; dark navy formal chief uniform, four small silver stars on each collar, white shirt, black tie. Preserve each man's exact face, hair and clothes in every shot; do not transfer any trait of these four onto officers or extras. Use @Image5 as the environment: the same six-lane downtown boulevard, palm trees, the skyline ahead, a gas station on the right, more than twenty black-and-white police cruisers parked at angles in a wide ring, doors open, light bars flashing; the camera stays on this boulevard and invents no other street. The officers are about thirty men and women of mixed ages in dark navy long-sleeve uniforms, silver badges, black duty belts, a few in dark tactical vests, plain patches with no readable text. FIXED GEOGRAPHY: the three men kneel side by side on the wet asphalt in the empty centre of the ring, facing the skyline, Michael on the left, Trevor in the middle, Franklin on the right; the officers stand behind the open cruiser doors about fifteen metres away; the chief's cruiser is parked directly in front of the three men; a police helicopter hovers high above. LIGHTING: hard white helicopter spotlight from directly above as the key, pulsing red and blue light-bar strobes as the fill from all around, warm amber sodium street lamps as the rim from behind; the wet asphalt mirrors every colour. Palette: wet black, navy, police red, cobalt blue, sodium amber, the gold of the medals. CAMERA POSITIONS, reused: CAM A wide from behind the officers at the cruiser doors, shoulder height, 35mm, the three men small in the centre; CAM B low at ground level just behind the three men, looking toward the chief's cruiser, 35mm; CAM C front medium of the three men, chest up, 50mm; CAM D 85mm telephoto close-up on one face or on hands. Motion is subtle and real time: no slow motion, nobody runs, the camera only pushes in slowly or holds. Nobody speaks.
+<span class="eyebrow">Step by step</span>
+<h2>The full workflow, <span class="grad-text">in Kolbo.</span></h2>
+<div class="step">
+<div>
+<span class="num">1</span><span class="tool">GPT IMAGE · IN KOLBO</span><h3>Turn the characters into real actors</h3>
+<p>Upload a screenshot of each character from the game and ask for a real photograph of the same man, as if an actor were cast for the movie. Describe the face, hair and clothes you want to keep, and tell it to remove every trace of the game.</p><div class="prompt"><div class="prompt-h"><span>Game character → real actor</span><button class="copy" data-copy="p-cast" type="button">Copy</button></div><pre id="p-cast">Image 1 shows Michael De Santa, the video game character from GTA V. Create a genuine photograph of him as a REAL living man, as if a real actor were cast for a live-action film, instantly recognisable as Michael: late 40s, short dark hair combed back with grey at the temples, heavy brow, tired knowing eyes, strong jaw, slight double chin. Wardrobe: unbuttoned navy suit jacket over an open-collared white dress shirt, no tie. Expression: a warm, fatherly half-smile. Remove every trace of the game model: no polygon planes, no painted texture, no plastic skin, no CGI. Real pores, real eyelids, real hairline, slight skin imperfections, subtle asymmetry, unretouched skin. Half-body portrait, 3:4, standing on a dry canyon road in the Los Angeles hills at golden-hour sunset, warm low backlight from the right, shot on ARRI Alexa, 50mm, f/2.8, Kodak Portra 400 look, natural colors, soft bokeh. Photoreal, no text, no logos.</pre></div><div class="note"><b>Tip:</b> keep them likeable. My first Trevor looked like a horror film villain. "Lovable, a little crazy, never menacing" fixed it.</div>
+</div>
+<div class="shots c2 p34"><figure><img alt="Michael in the game" loading="lazy" src="media/game_michael.jpg"/><figcaption>In the game</figcaption></figure><figure><img alt="Michael as a real man" loading="lazy" src="media/real_michael.jpg"/><figcaption>As a real actor</figcaption></figure><figure><img alt="Trevor in the game" loading="lazy" src="media/game_trevor.jpg"/><figcaption>In the game</figcaption></figure><figure><img alt="Trevor as a real man" loading="lazy" src="media/real_trevor.jpg"/><figcaption>As a real actor</figcaption></figure></div>
+</div>
+<div class="step">
+<div>
+<span class="num">2</span><span class="tool">GPT IMAGE · IN KOLBO</span><h3>Lock every face with a character sheet</h3>
+<p>Give the photo you chose as the reference and ask for a sheet of the same person from several angles. This sheet is what the video model reads, and it is what keeps the same face in every shot.</p><div class="prompt"><div class="prompt-h"><span>Character sheet prompt</span><button class="copy" data-copy="p-sheet" type="button">Copy</button></div><pre id="p-sheet">Character reference sheet of the SAME real person shown in the reference image(s): keep the face, age, hair, skin and wardrobe strictly identical. Plain light grey studio background, even soft light, photographic, real person not a 3D render. Top row: 4 full-body views (front, three-quarter left, side profile, back). Bottom row: 4 head-and-shoulders views (front, three-quarter left, profile, three-quarter right) with a neutral expression. Real skin texture, pores, subtle asymmetry. No text, no labels, no numbers, no logos. Keep his warm, lovable look, not menacing. Wardrobe: off-white V-neck t-shirt with light road dust, worn blue jeans, brown work boots; the small dotted CUT HERE tattoo on the neck.</pre></div><p style="margin-top:16px">Do the same for anyone new in your story. Here it's the police chief who hands out the medals.</p>
+</div>
+<div class="shots"><figure><img alt="Trevor character sheet" loading="lazy" src="media/sheet_trevor.jpg"/></figure><figure><img alt="Police chief character sheet" loading="lazy" src="media/sheet_chief.jpg"/><figcaption>Same person in every panel. That's the whole point.</figcaption></figure></div>
+</div>
+<div class="step">
+<div>
+<span class="num">3</span><span class="tool">GPT IMAGE · IN KOLBO</span><h3>One empty location</h3>
+<p>One image of the place with nobody in it: the boulevard at night, the cruisers in a ring, the helicopter light. That's all the references you need. Cops, citizens, uniforms and the medals are words in the prompt, not more images.</p><div class="prompt"><div class="prompt-h"><span>Location prompt</span><button class="copy" data-copy="p-loc" type="button">Copy</button></div><pre id="p-loc">Empty location photograph, no people. A wide six-lane city boulevard at night in downtown Los Angeles, palm trees, closed shops and a gas station on the side, more than twenty black-and-white police cruisers parked at angles across the road forming a wide ring around an empty patch of asphalt in the center, all light bars flashing red and blue, doors open, a helicopter above casting a white spotlight cone onto the empty center. Night in a big Los Angeles-style city, wet asphalt reflecting red and blue police lights, sodium street lamps, light haze. Low wide angle from the road surface, 24mm. Look: a frame from a big-budget Hollywood crime feature, shot on ARRI Alexa 65, fine 35mm film grain, natural colors, real textures, no retouching. No logos, no watermark.</pre></div>
+</div>
+<div class="shots"><figure><img alt="Empty city boulevard at night with police cruisers" loading="lazy" src="media/loc_street.jpg"/><figcaption>The location, empty</figcaption></figure></div>
+</div>
+<div class="step">
+<div>
+<span class="num">4</span><span class="tool">SEEDANCE 2.5 · IN KOLBO</span><h3>Shoot the whole film in one run</h3>
+<p>One Seedance 2.5 run, 30 seconds, 9:16, with the sheets and the location as references. The prompt is written like a director talks:</p><ul><li><b>The hook first:</b> red laser dots on Trevor's face in the first second.</li><li><b>Second by second:</b> every shot gets its size, angle, camera move and one simple action.</li><li><b>An emotional arc</b> from fear to surprise to a group hug, so faces never reset between cuts.</li></ul><div class="prompt long"><div class="prompt-h"><span>The Last Arrest · the real prompt (9:16, 30s)</span><button class="copy" data-copy="p-scene" type="button">Copy</button></div><pre id="p-scene">Three famous criminals kneel on a wet city boulevard at night, surrounded by the police, and instead of handcuffs the police chief gives them gold medals. Ultra-realistic live-action short film, a big-budget Hollywood crime film that turns into a warm comedy, 30 seconds, vertical 9:16, ten shots cut together inside one generation, shot on ARRI Alexa Mini with spherical primes, Cinestill 800T night colour, fine film grain. Use @Image1 as Michael, @Image2 as Franklin, @Image3 as Trevor and @Image4 as the police chief: each sheet is an identity reference only, never render a sheet, a grey studio background or more than one copy of anyone. @Image1 Michael: late 40s, short dark hair combed back with grey at the temples, heavy brow, tired knowing eyes; navy suit jacket open over a white open-collared shirt, dark trousers. @Image2 Franklin: about 25, slim, very short black hair, short neat beard; dark blue short-sleeve button shirt over a white long-sleeve tee, thin gold chain, dark jeans, white sneakers. @Image3 Trevor: about 45, balding with thin messy dark hair on the sides, weathered sunburnt skin, warm wild eyes, the small dotted CUT HERE tattoo around his neck; dirty off-white V-neck t-shirt, worn blue jeans, brown work boots; lovable, a little crazy, never menacing. @Image4 the chief: about 62, broad, short grey hair, thick grey moustache, deep forehead lines; dark navy formal chief uniform, four small silver stars on each collar, white shirt, black tie. Preserve each man's exact face, hair and clothes in every shot; do not transfer any trait of these four onto officers or extras. Use @Image5 as the environment: the same six-lane downtown boulevard, palm trees, the skyline ahead, a gas station on the right, more than twenty black-and-white police cruisers parked at angles in a wide ring, doors open, light bars flashing; the camera stays on this boulevard and invents no other street. The officers are about thirty men and women of mixed ages in dark navy long-sleeve uniforms, silver badges, black duty belts, a few in dark tactical vests, plain patches with no readable text. FIXED GEOGRAPHY: the three men kneel side by side on the wet asphalt in the empty centre of the ring, facing the skyline, Michael on the left, Trevor in the middle, Franklin on the right; the officers stand behind the open cruiser doors about fifteen metres away; the chief's cruiser is parked directly in front of the three men; a police helicopter hovers high above. LIGHTING: hard white helicopter spotlight from directly above as the key, pulsing red and blue light-bar strobes as the fill from all around, warm amber sodium street lamps as the rim from behind; the wet asphalt mirrors every colour. Palette: wet black, navy, police red, cobalt blue, sodium amber, the gold of the medals. CAMERA POSITIONS, reused: CAM A wide from behind the officers at the cruiser doors, shoulder height, 35mm, the three men small in the centre; CAM B low at ground level just behind the three men, looking toward the chief's cruiser, 35mm; CAM C front medium of the three men, chest up, 50mm; CAM D 85mm telephoto close-up on one face or on hands. Motion is subtle and real time: no slow motion, nobody runs, the camera only pushes in slowly or holds. Nobody speaks.
 
 [0:00-0:02] SHOT 1, CAM D, extreme close-up on @Image3 Trevor's face, locked-off. Rain drips down his sunburnt forehead, his hands are clasped on top of his head, he squints into the blinding white spotlight from above. Five red laser dots crawl across his cheek and his neck tattoo; red and blue strobes wash over his skin. His eyes dart to the side once, then hold: caught.
 [0:02-0:05] SHOT 2, CAM A, slow push-in. CUT. STATE CARRIED OVER: Trevor still kneels with hands on his head, laser dots on his chest. The wide reveal: @Image1 Michael, @Image3 Trevor and @Image2 Franklin kneel in the spotlight in the centre of the ring, dozens of officers crouch behind the open doors aiming pistols with red laser sights at them. It looks like the last scene of a crime film. Tense, total silence among the men.
@@ -249,51 +248,47 @@ EMOTIONAL ARC: caught (0-2) → the tension of a real arrest (2-8) → dread (8-
 STYLE AND REALISM: unretouched skin with visible pores and rain on it, no beauty filter, no video-game look, no CGI look, real wet night. The only text anywhere is POLICE on the cruiser doors. No subtitles, no captions, no text overlays, no logos.
 AUDIO: continuous night-city ambience: sirens that fade out after SHOT 3, the helicopter rotor, light rain, footsteps splashing, the clink of the medal, applause that grows from SHOT 6, laughter and a cheer at the end. No music, no speech.
 AVOID: jitter, temporal flicker, facial drift between shots, clothing change, extra fingers, merged faces or bodies in the hug, a character sheet or white background in any frame, chaotic composition.</pre></div>
-    </div>
-    <div class="shots c2 tall"><figure><img src="media/a_0.6.jpg" alt="Trevor's face with red laser dots" loading="lazy"><figcaption>The hook: red laser dots</figcaption></figure><figure><img src="media/a_9.jpg" alt="The trio kneels" loading="lazy"><figcaption>Busted, finally</figcaption></figure><figure><img src="media/a_20.jpg" alt="Citizens applaud" loading="lazy"><figcaption>The whole city applauds</figcaption></figure><figure><img src="media/a_27.jpg" alt="Trevor hugs the chief" loading="lazy"><figcaption>Trevor hugs the chief</figcaption></figure></div>
-  </div>
-  <div class="step">
-    <div>
-      <span class="num">5</span><span class="tool">DRAFT → FULL QUALITY</span><h3>Draft first, then Full Quality</h3>
-      <p>Run every scene as a 480p draft. It's fast and cheap, so you can watch, fix the prompt and run again. Only when the take is right, send it to <b>Full Quality</b> in Kolbo. It renders the same take again in native 1080p.</p><div class="note"><b>Important:</b> drafts you plan to finish in Full Quality should be made with image references only, no reference video.</div>
-    </div>
-    <div class="shots c2 tall"><figure><img src="media/a_14.jpg" alt="The trio with gold medals" loading="lazy"><figcaption>Medals instead of handcuffs</figcaption></figure><figure><img src="media/a_4.jpg" alt="Wide shot of the arrest" loading="lazy"><figcaption>The same take in 1080p</figcaption></figure></div>
-  </div>
-  <div class="step">
-    <div>
-      <span class="num">6</span><span class="tool">CLAUDE · THE EDIT</span><h3>End it in the game's own language</h3>
-      <p>The last frame is what gets people to tag their friends. I used the real GTA V screens: five wanted stars that flash and go out, and the yellow "mission passed" with its checklist. Don't draw them from memory, everyone who played will see it's wrong. I had Claude rebuild them from real screenshots of the game.</p><div class="prompt"><div class="prompt-h"><span>Prompt for Claude (attach 2-3 real screenshots)</span><button class="copy" type="button" data-copy="p-ui">Copy</button></div><pre id="p-ui">I attached real screenshots of the GTA V "mission passed" screen. Rebuild it as a transparent PNG overlay for my video, exactly like the game: trace the yellow "mission passed" lettering from the screenshot (don't use a similar font), the same yellow and the same dark box under it with a title row, three rows with white checkboxes and a "Completion - Gold 100%" row with the gold dot. My texts: title "The Last Arrest", rows "13 Years of Chaos", "Never Busted", "Made the Police Cry". Then put it on the last frame of my video with a short fade-in, and keep it inside Instagram's safe zone: nothing in the top 250 px, the bottom 420 px or the right-side icons of a 1080x1920 frame.</pre></div><div class="note"><b>Music:</b> on Instagram pick "See You Again" from the music library, from the line that fits your ending. It's the song of this whole trend.</div>
-    </div>
-    <div class="shots c2 tall"><figure><img src="media/a_31.5.jpg" alt="Mission passed screen" loading="lazy"><figcaption>Mission passed, inside Instagram's safe zone</figcaption></figure><figure><img src="media/a_9.jpg" alt="Wanted stars top right" loading="lazy"><figcaption>Five wanted stars, top right</figcaption></figure></div>
-  </div>
+</div>
+<div class="shots c2 tall"><figure><img alt="Trevor's face with red laser dots" loading="lazy" src="media/a_0.6.jpg"/><figcaption>The hook: red laser dots</figcaption></figure><figure><img alt="The trio kneels" loading="lazy" src="media/a_9.jpg"/><figcaption>Busted, finally</figcaption></figure><figure><img alt="Citizens applaud" loading="lazy" src="media/a_20.jpg"/><figcaption>The whole city applauds</figcaption></figure><figure><img alt="Trevor hugs the chief" loading="lazy" src="media/a_27.jpg"/><figcaption>Trevor hugs the chief</figcaption></figure></div>
+</div>
+<div class="step">
+<div>
+<span class="num">5</span><span class="tool">DRAFT → FULL QUALITY</span><h3>Draft first, then Full Quality</h3>
+<p>Run every scene as a 480p draft. It's fast and cheap, so you can watch, fix the prompt and run again. Only when the take is right, send it to <b>Full Quality</b> in Kolbo. It renders the same take again in native 1080p.</p><div class="note"><b>Important:</b> drafts you plan to finish in Full Quality should be made with image references only, no reference video.</div>
+</div>
+<div class="shots c2 tall"><figure><img alt="The trio with gold medals" loading="lazy" src="media/a_14.jpg"/><figcaption>Medals instead of handcuffs</figcaption></figure><figure><img alt="Wide shot of the arrest" loading="lazy" src="media/a_4.jpg"/><figcaption>The same take in 1080p</figcaption></figure></div>
+</div>
+<div class="step">
+<div>
+<span class="num">6</span><span class="tool">CLAUDE · THE EDIT</span><h3>End it in the game's own language</h3>
+<p>The last frame is what gets people to tag their friends. I used the real GTA V screens: five wanted stars that flash and go out, and the yellow "mission passed" with its checklist. Don't draw them from memory, everyone who played will see it's wrong. I had Claude rebuild them from real screenshots of the game.</p><div class="prompt"><div class="prompt-h"><span>Prompt for Claude (attach 2-3 real screenshots)</span><button class="copy" data-copy="p-ui" type="button">Copy</button></div><pre id="p-ui">I attached real screenshots of the GTA V "mission passed" screen. Rebuild it as a transparent PNG overlay for my video, exactly like the game: trace the yellow "mission passed" lettering from the screenshot (don't use a similar font), the same yellow and the same dark box under it with a title row, three rows with white checkboxes and a "Completion - Gold 100%" row with the gold dot. My texts: title "The Last Arrest", rows "13 Years of Chaos", "Never Busted", "Made the Police Cry". Then put it on the last frame of my video with a short fade-in, and keep it inside Instagram's safe zone: nothing in the top 250 px, the bottom 420 px or the right-side icons of a 1080x1920 frame.</pre></div><div class="note"><b>Music:</b> on Instagram pick "See You Again" from the music library, from the line that fits your ending. It's the song of this whole trend.</div>
+</div>
+<div class="shots c2 tall"><figure><img alt="Mission passed screen" loading="lazy" src="media/a_31.5.jpg"/><figcaption>Mission passed, inside Instagram's safe zone</figcaption></figure><figure><img alt="Wanted stars top right" loading="lazy" src="media/a_9.jpg"/><figcaption>Five wanted stars, top right</figcaption></figure></div>
+</div>
 </div></section>
-
 <section class="sec"><div class="wrap">
-  <span class="eyebrow">Learn from my takes</span>
-  <h2>What broke, <span class="grad-text">and what fixed it.</span></h2>
-  <div class="miss"><div><b>A UI nobody believed</b><p><span class="x">Broke:</span> a "mission passed" I drew from memory. Fans spotted it in a second.</p><p><span class="ok">Fixed:</span> rebuilt from real screenshots of the game, with the traced lettering and the real colours.</p></div><div><b>Text hidden by Instagram</b><p><span class="x">Broke:</span> the stars and the end card sat where Instagram puts the likes and the caption.</p><p><span class="ok">Fixed:</span> everything inside the safe zone: nothing in the top 250 px, the bottom 420 px or the icon column on the right.</p></div><div><b>A line nobody understood</b><p><span class="x">Broke:</span> "See you in Vice City". Half the world didn't get it.</p><p><span class="ok">Fixed:</span> "Goodbye GTA V · Hello GTA VI". Plain words everyone knows.</p></div></div>
+<span class="eyebrow">Learn from my takes</span>
+<h2>What broke, <span class="grad-text">and what fixed it.</span></h2>
+<div class="miss"><div><b>A UI nobody believed</b><p><span class="x">Broke:</span> a "mission passed" I drew from memory. Fans spotted it in a second.</p><p><span class="ok">Fixed:</span> rebuilt from real screenshots of the game, with the traced lettering and the real colours.</p></div><div><b>Text hidden by Instagram</b><p><span class="x">Broke:</span> the stars and the end card sat where Instagram puts the likes and the caption.</p><p><span class="ok">Fixed:</span> everything inside the safe zone: nothing in the top 250 px, the bottom 420 px or the icon column on the right.</p></div><div><b>A line nobody understood</b><p><span class="x">Broke:</span> "See you in Vice City". Half the world didn't get it.</p><p><span class="ok">Fixed:</span> "Goodbye GTA V · Hello GTA VI". Plain words everyone knows.</p></div></div>
 </div></section>
-
 <section class="final" id="start"><div class="wrap">
-  <span class="eyebrow">Your turn</span>
-  <h2>Give them <span class="grad-text">your ending.</span></h2>
-  <p class="lead">GTA VI is out on November 19. Every tool on this page lives in Kolbo. Sign up through my link and take the discount for your first month.</p>
-  <a class="btn btn-grad" href="https://app.kolbo.ai?via=orellevi" target="_blank" rel="noopener">Start on Kolbo</a>
-  <div class="codes">
-    <button class="code" type="button" data-copytext="ORELLEVI50"><span><b>ORELLEVI50</b><br><i>50% off your first month</i></span><span class="pill">Copy</span></button>
-    <button class="code" type="button" data-copytext="ORELLEVI30"><span><b>ORELLEVI30</b><br><i>30% off for 3 months</i></span><span class="pill">Copy</span></button>
-  </div>
-  <div class="steps3">
-    <div><b>1. Sign up</b>Through <a href="https://app.kolbo.ai?via=orellevi" target="_blank" rel="noopener">my link</a> and accept the cookies on the site.</div>
-    <div><b>2. Pick a monthly plan</b>The codes work on your first purchase.</div>
-    <div><b>3. Enter the code</b>At checkout. Then come back here and start with step 1.</div>
-  </div>
-  <p class="fine" style="margin-top:28px">Made one? Tag <b>@leviorel</b> and <b>@kolbo.ai</b>, I want to see it.</p>
+<span class="eyebrow">Your turn</span>
+<h2>Give them <span class="grad-text">your ending.</span></h2>
+<p class="lead">GTA VI is out on November 19. Every tool on this page lives in Kolbo. Sign up through my link and take the discount for your first month.</p>
+<a class="btn btn-grad" href="https://app.kolbo.ai?via=orellevi" rel="noopener" target="_blank">Start on Kolbo</a>
+<div class="codes">
+<button class="code" data-copytext="ORELLEVI50" type="button"><span><b>ORELLEVI50</b><br/><i>50% off your first month</i></span><span class="pill">Copy</span></button>
+<button class="code" data-copytext="ORELLEVI30" type="button"><span><b>ORELLEVI30</b><br/><i>30% off for 3 months</i></span><span class="pill">Copy</span></button>
+</div>
+<div class="steps3">
+<div><b>1. Sign up</b>Through <a href="https://app.kolbo.ai?via=orellevi" rel="noopener" target="_blank">my link</a> and accept the cookies on the site.</div>
+<div><b>2. Pick a monthly plan</b>The codes work on your first purchase.</div>
+<div><b>3. Enter the code</b>At checkout. Then come back here and start with step 1.</div>
+</div>
+<p class="fine" style="margin-top:28px">Made one? Tag <b>@leviorel</b> and <b>@kolbo.ai</b>, I want to see it.</p>
 </div></section>
-
-<footer><div class="wrap"><span>Orel Levi · <a href="https://www.instagram.com/leviorel/" target="_blank" rel="noopener">@leviorel</a></span><span>The Last Arrest · Made with Kolbo AI · Fan-made, not affiliated with Rockstar Games</span></div></footer>
+<footer><div class="wrap"><span>Orel Levi · <a href="https://www.instagram.com/leviorel/" rel="noopener" target="_blank">@leviorel</a></span><span>The Last Arrest · Made with Kolbo AI · Fan-made, not affiliated with Rockstar Games</span></div></footer>
 <div class="toast" id="toast">Copied</div>
-
 <script>
 const toast=document.getElementById('toast');let tt;
 function flash(msg){toast.textContent=msg;toast.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>toast.classList.remove('on'),1600)}
